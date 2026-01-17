@@ -179,7 +179,16 @@ document.addEventListener('DOMContentLoaded', function () {
   pdfModal.innerHTML = `
     <div class="pdf-wrapper">
       <div class="pdf-ad">
-        <div class="ad-480x60">Ad 480x60</div>
+        <div class="ad-480x60"><script>
+  atOptions = {
+    'key' : '6bb5e4338243072839d6c15f1fbb2216',
+    'format' : 'iframe',
+    'height' : 60,
+    'width' : 468,
+    'params' : {}
+  };
+</script>
+<script src="https://tuckerclassesjackal.com/6bb5e4338243072839d6c15f1fbb2216/invoke.js"></script></div>
       </div>
       <iframe src="${pdfUrl}"></iframe>
       <button id="closePdf">✕</button>
@@ -285,3 +294,4 @@ _Hasync.push(['Histats.track_hits', '']);
 </body>
 
 </html>
+
