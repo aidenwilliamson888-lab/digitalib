@@ -19,7 +19,7 @@
 
     <!-- Book Info -->
     <div class="flex flex-col justify-center">
-      <h1 id="bookTitle" class="text-2xl md:text-3xl font-bold mb-3">Your Book is Ready !</h1>
+      <h1 id="bookTitle" class="text-2xl md:text-3xl font-bold mb-3">Your Book Ready to Download  !</h1>
 
       <p id="bookDescription" class="text-gray-600 mb-5 leading-relaxed">
         Download the official PDF version of this book. Instant access, high-quality content, and easy reading on any device.
@@ -94,9 +94,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const ASIN = /^[A-Z0-9]{10}$/i.test(pathParts[pathParts.length - 1])
     ? pathParts[pathParts.length - 1]
     : 'B0XXXXXXX';
-
-  /* ================= WEBSITE TITLE ================= */
-  document.title = `Digital PDF Library ${ASIN}`;
 
   /* ================= ELEMENTS ================= */
   const openPdf = document.getElementById('openPdf');
@@ -179,16 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
   pdfModal.innerHTML = `
     <div class="pdf-wrapper">
       <div class="pdf-ad">
-        <div class="ad-480x60"><script>
-  atOptions = {
-    'key' : '6bb5e4338243072839d6c15f1fbb2216',
-    'format' : 'iframe',
-    'height' : 60,
-    'width' : 468,
-    'params' : {}
-  };
-</script>
-<script src="https://tuckerclassesjackal.com/6bb5e4338243072839d6c15f1fbb2216/invoke.js"></script></div>
+        <div class="ad-480x60">Ad 480x60</div>
       </div>
       <iframe src="${pdfUrl}"></iframe>
       <button id="closePdf">✕</button>
@@ -292,6 +280,4 @@ _Hasync.push(['Histats.track_hits', '']);
 })();
 </script>
 </body>
-
 </html>
-
