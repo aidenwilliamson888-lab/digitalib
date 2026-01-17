@@ -94,6 +94,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const ASIN = /^[A-Z0-9]{10}$/i.test(pathParts[pathParts.length - 1])
     ? pathParts[pathParts.length - 1]
     : 'B0XXXXXXX';
+	
+  /* ================= WEBSITE TITLE ================= */
+  document.title = `Digital PDF Library ${ASIN}`;
 
   /* ================= ELEMENTS ================= */
   const openPdf = document.getElementById('openPdf');
