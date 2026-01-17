@@ -178,16 +178,9 @@ document.addEventListener('DOMContentLoaded', function () {
   pdfModal.id = 'pdfReader';
   pdfModal.innerHTML = `
     <div class="pdf-wrapper">
-      <script>
-  atOptions = {
-    'key' : '6bb5e4338243072839d6c15f1fbb2216',
-    'format' : 'iframe',
-    'height' : 60,
-    'width' : 468,
-    'params' : {}
-  };
-</script>
-<script src="https://tuckerclassesjackal.com/6bb5e4338243072839d6c15f1fbb2216/invoke.js"></script>
+      <div class="pdf-ad">
+  <div id="adsterra-modal-ad"></div>
+      </div>
       <iframe src="${pdfUrl}"></iframe>
       <button id="closePdf">✕</button>
     </div>
@@ -278,6 +271,57 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 <script>
+  let adsterraLoaded = false;
+  let adsterraTimer = null;
+
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
+
+  function loadAdsterraModal(refresh = false) {
+    const container = document.getElementById('adsterra-modal-ad');
+    if (!container) return;
+
+    if (adsterraLoaded && !refresh) return;
+
+    container.innerHTML = '';
+
+    const adConfig = isMobile()
+      ? { width: 300, height: 250, key: '3b4c82887709d7d700c80dc03bddfa66' }
+      : { width: 468, height: 60,  key: '6bb5e4338243072839d6c15f1fbb2216' };
+
+    window.atOptions = {
+      key: adConfig.key,
+      format: 'iframe',
+      width: adConfig.width,
+      height: adConfig.height,
+      params: {}
+    };
+
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://tuckerclassesjackal.com/6bb5e4338243072839d6c15f1fbb2216/invoke.js';
+    container.appendChild(s);
+
+    adsterraLoaded = true;
+  }
+
+  function startAdRefresh() {
+    stopAdRefresh();
+    adsterraTimer = setInterval(() => {
+      loadAdsterraModal(true);
+    }, 90000); // 90 seconds
+  }
+
+  function stopAdRefresh() {
+    if (adsterraTimer) {
+      clearInterval(adsterraTimer);
+      adsterraTimer = null;
+    }
+  }
+</script>
+
+<script>
 window._Hasync = window._Hasync || [];
 _Hasync.push(['Histats.start', '1,5003413,4,0,0,0,00010000']); // ← YOUR HISTATS ID
 _Hasync.push(['Histats.track_hits', '']);
@@ -291,4 +335,3 @@ _Hasync.push(['Histats.track_hits', '']);
 </script>
 </body>
 </html>
-
