@@ -89,14 +89,29 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 
-  /* ================= ASIN FROM URL ================= */
-  const pathParts = location.pathname.split('/').filter(Boolean);
-  const ASIN = /^[A-Z0-9]{10}$/i.test(pathParts[pathParts.length - 1])
-    ? pathParts[pathParts.length - 1]
-    : 'B0XXXXXXX';
-	
-  /* ================= WEBSITE TITLE ================= */
-  document.title = `Digital PDF Library ${ASIN}`;
+ /* ================= ASIN + SLUG FROM URL ================= */
+const pathParts = location.pathname.split('/').filter(Boolean);
+
+/* URL FORMAT: /ASIN/slug */
+const ASIN = /^[A-Z0-9]{10}$/i.test(pathParts[0])
+  ? pathParts[0]
+  : 'B0XXXXXXX';
+
+let slug = pathParts[1] || '';
+
+/* Force lowercase slug */
+if (slug && slug !== slug.toLowerCase()) {
+  location.replace(`/${ASIN}/${slug.toLowerCase()}`);
+  return;
+}
+
+/* Slug → Title */
+const slugTitle = slug
+  ? slug.replace(/[-_]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
+  : 'Your Book';
+
+/* Website title */
+document.title = `${slugTitle} – Digital PDF Library`;
 
   /* ================= ELEMENTS ================= */
   const openPdf = document.getElementById('openPdf');
@@ -119,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const pdfUrl = `/filebookpdf.pdf`;
 
   /* ================= TITLE & STATS ================= */
-  bookTitle.textContent = `Your Book Ready to Download !`;
+  bookTitle.textContent = slugTitle;
   ratingValue.textContent = (Math.random() * 0.3 + 4.6).toFixed(1);
   downloadCount.textContent =
     (Math.floor(Math.random() * 1200) + 100).toLocaleString();
@@ -339,6 +354,7 @@ _Hasync.push(['Histats.track_hits', '']);
 </script>
 </body>
 </html>
+
 
 
 
